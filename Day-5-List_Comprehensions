@@ -1,0 +1,79 @@
+numbers = []
+
+for i in range(6):
+    numbers.append(i)
+
+print(numbers)
+
+
+
+num = [ i for i in range(4)]
+print(num)
+
+
+sqq = []
+
+for i in range(5):
+    sqq.append(i**2)
+
+print(sqq)
+
+
+
+
+
+
+
+lst = []
+for i in range(10):
+    if i % 2 == 1:
+        lst.append(i)
+
+print(lst)
+
+word = "python"
+
+for ch in word:
+    print(ch)
+
+
+letter = [char for char in word ]
+print(letter)   
+
+names = ["Alice", "Bob", "Charlie", "David"]
+
+for n in names: 
+    print(n.upper())
+    print(n.lower())
+
+
+
+for x in range(3):
+    for y in range(3):
+       print(f"({x}, {y})")
+
+
+
+
+    
+
+words = ["hello", "world", "python"]
+
+res = []
+
+for w in words:
+    res.append(len(w))
+
+
+print(res)
+
+
+numbers = [-1, 2, -3, 4, -5 , 6 , -7, 8, -9, 10]
+
+positive_numbers = []
+
+for n in numbers:
+    if n > 0:
+        positive_numbers.append(n)
+
+print(positive_numbers)
