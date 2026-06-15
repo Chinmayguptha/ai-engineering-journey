@@ -1,0 +1,260 @@
+# ==========================================
+# LINEAR REGRESSION MASTERCLASS
+# ==========================================
+
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score
+)
+from sklearn.preprocessing import PolynomialFeatures
+
+print("\n" + "="*50)
+print("1. BASIC LINEAR REGRESSION")
+print("="*50)
+
+# Hours Studied -> Marks
+
+X = [[1], [2], [3], [4], [5]]
+y = [30, 40, 50, 60, 70]
+
+model = LinearRegression()
+
+model.fit(X, y)
+
+prediction = model.predict([[6]])
+
+print("Predicted Marks for 6 Hours Study =", prediction[0])
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("2. SLOPE AND INTERCEPT")
+print("="*50)
+
+print("Slope (m) =", model.coef_[0])
+print("Intercept (b) =", model.intercept_)
+
+# Equation:
+# y = mx + b
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("3. TRAIN TEST SPLIT")
+print("="*50)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+
+print("Training Data =", X_train)
+print("Testing Data =", X_test)
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("4. MODEL EVALUATION")
+print("="*50)
+
+predictions = model.predict(X)
+
+print("Actual Values    =", y)
+print("Predicted Values =", predictions)
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("5. RESIDUALS")
+print("="*50)
+
+for actual, predicted in zip(y, predictions):
+
+    residual = actual - predicted
+
+    print(
+        f"Actual={actual} "
+        f"Predicted={predicted:.2f} "
+        f"Residual={residual:.2f}"
+    )
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("6. MAE")
+print("="*50)
+
+mae = mean_absolute_error(y, predictions)
+
+print("MAE =", mae)
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("7. MSE")
+print("="*50)
+
+mse = mean_squared_error(y, predictions)
+
+print("MSE =", mse)
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("8. RMSE")
+print("="*50)
+
+rmse = mse ** 0.5
+
+print("RMSE =", rmse)
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("9. R² SCORE")
+print("="*50)
+
+r2 = r2_score(y, predictions)
+
+print("R² Score =", r2)
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("10. MULTIPLE LINEAR REGRESSION")
+print("="*50)
+
+# Hours Studied, Attendance
+
+X_multi = [
+    [2, 80],
+    [3, 85],
+    [4, 90],
+    [5, 95]
+]
+
+y_multi = [40, 50, 60, 70]
+
+multi_model = LinearRegression()
+
+multi_model.fit(X_multi, y_multi)
+
+multi_prediction = multi_model.predict([[6, 98]])
+
+print(
+    "Predicted Marks "
+    "(6 Hours, 98% Attendance) =",
+    multi_prediction[0]
+)
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("11. POLYNOMIAL REGRESSION")
+print("="*50)
+
+# x² pattern
+
+X_poly = [[1], [2], [3], [4]]
+y_poly = [1, 4, 9, 16]
+
+poly = PolynomialFeatures(degree=2)
+
+X_poly_transformed = poly.fit_transform(X_poly)
+
+poly_model = LinearRegression()
+
+poly_model.fit(
+    X_poly_transformed,
+    y_poly
+)
+
+poly_prediction = poly_model.predict(
+    poly.transform([[5]])
+)
+
+print(
+    "Polynomial Prediction for x=5 =",
+    poly_prediction[0]
+)
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("12. GRADIENT DESCENT INTUITION")
+print("="*50)
+
+error = 100
+
+while error > 1:
+
+    print("Current Error =", round(error, 2))
+
+    error = error * 0.8
+
+print("\nGradient Descent Goal:")
+print("Keep reducing error until minimum.")
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("13. OVERFITTING vs UNDERFITTING")
+print("="*50)
+
+print("UNDERFITTING:")
+print("Model too simple.")
+print("Cannot learn the pattern.")
+
+print("\nGOOD FIT:")
+print("Model learns the correct pattern.")
+
+print("\nOVERFITTING:")
+print("Model memorizes training data.")
+print("Fails on unseen data.")
+
+# ------------------------------------------
+
+print("\n" + "="*50)
+print("LINEAR REGRESSION REVISION")
+print("="*50)
+
+print("""
+1. Linear Regression predicts numerical values.
+
+2. Formula:
+   y = mx + b
+
+3. fit()  -> Train model
+
+4. predict() -> Predict output
+
+5. Residual = Actual - Predicted
+
+6. MAE  -> Average Error
+
+7. MSE  -> Squared Error
+
+8. RMSE -> Root Mean Squared Error
+
+9. R² Score -> Model Performance
+
+10. Multiple Linear Regression
+    = Multiple Features
+
+11. Polynomial Regression
+    = Handles Curved Relationships
+
+12. Gradient Descent
+    = Minimizes Error
+
+13. Overfitting
+    = Memorization
+
+14. Underfitting
+    = Too Simple
+""")
